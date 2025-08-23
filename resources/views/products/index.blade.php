@@ -17,7 +17,10 @@
         <div class="row justify-content-center my-3">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex align-items-center">
+                        @if ($product->productImage)
+                            <img src="{{ asset($product->productImage->product_image_url) }}" alt="{{ $product->name }}" class="img-fluid me-3" style="width: 50px; height: 50px;">
+                        @endif
                         <h5>{{ $product->name }}</h5>
                     </div>
 

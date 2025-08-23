@@ -26,7 +26,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('products.store') }}">
+                    <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -58,11 +58,24 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="image" class="col-md-3 col-form-label text-md-end">{{ __('Image') }}</label>
+
+                            <div class="col-md-7">
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image">
+
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="description" class="col-md-3 col-form-label text-md-end">{{ __('Description') }}</label>
 
                             <div class="col-md-7">
-                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required>
-                                </textarea>
+                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
 
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -73,7 +86,7 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-7 offset-md-3">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Create') }}
                                 </button>

@@ -18,7 +18,10 @@
                 <div class="card-header">
                     <h5>{{ $product->name }}</h5>
                 </div>
-
+                @if ($product->productImage)
+                    <img src="{{ $product->productImage->product_image_url }}" class="card-img-top img-fluid" alt="{{ $product->name }}">
+                @endif
+                
                 <div class="card-body">
                     {{ $product->description }}
                 </div>

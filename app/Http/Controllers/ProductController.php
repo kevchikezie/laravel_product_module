@@ -17,17 +17,24 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $this->products->create($request->validated());
+        $product = $this->products->create($request->only(['name', 'price', 'description']));
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->extension();
+            $image->move(public_path('uploads'), $imageName);
+
+            $product->productImage()->create(['name' => $imageName]);
+        }
 
         return redirect()->back()->with('success', 'Product created successfully.');
     }
 
     public function index()
     {
-        $products = $this->products->paginate();
+        $products = $this->products->with('productImage')->paginate();
 
         return view('products.index', compact('products'));
-
     }
 
     public function show($id)
