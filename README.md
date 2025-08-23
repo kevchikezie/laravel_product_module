@@ -50,12 +50,17 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
+7. **Build frontend:**
+```bash
+npm run build
+```
+
 ### Run the App
 1. **Start the local development server:**
 ```bash
-composer run dev
+php artisan serve
 ```
-Visit link displayed in your terminal on your browser. It might look like this 
+Visit the link displayed in your terminal on your browser. It might look like this 
 `Server running on [http://127.0.0.1:8000]`
 
 2. **Registration (Optional):**
