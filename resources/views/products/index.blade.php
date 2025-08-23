@@ -5,10 +5,12 @@
     <div class="row justify-content-center my-3">
         <div class="col-md-8">
             <div class="d-flex justify-content-between align-items-center">
-                <h3>List of Products</h3><h3>Product Description</h3>
-                <a href="{{ route('products.create') }}" class="btn btn-outline-success btn-sm">
-                    <i class="fas fa-arrow-left"></i> Create Product
-                </a>
+                <h3>List of Products</h3>
+                @auth
+                    <a href="{{ route('products.create') }}" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-arrow-left"></i> Create Product
+                    </a>
+                @endauth
             </div>
         </div>
     </div>
