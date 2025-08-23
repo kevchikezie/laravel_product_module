@@ -13,4 +13,9 @@ class ProductController extends Controller
     {
         return $this->products->paginate();
     }
+
+    public function show($id)
+    {
+        return $this->products->findOrFail($id);
+    }
 }
