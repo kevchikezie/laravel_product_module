@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 class ProductService
 {
@@ -16,10 +17,14 @@ class ProductService
 
     public function uploadImage(Product $product, UploadedFile $image): void
     {
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('uploads'), $imageName);
+        try {
+            $imageName = time().'.'.$image->extension();
+            $image->move(public_path('uploads'), $imageName);
 
-        $product->productImage()->create(['name' => $imageName]);
+            $product->productImage()->create(['name' => $imageName]);
+        } catch (\Exception $e) {
+            Log::error('Image upload failed: '.$e->getMessage());
+        }
     }
 
     public function allProducts()
