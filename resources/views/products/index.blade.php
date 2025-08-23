@@ -4,9 +4,15 @@
 <div class="container">
     <div class="row justify-content-center my-3">
         <div class="col-md-8">
-            <h3>List of Products</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>List of Products</h3><h3>Product Description</h3>
+                <a href="{{ route('products.create') }}" class="btn btn-outline-success btn-sm">
+                    <i class="fas fa-arrow-left"></i> Create Product
+                </a>
+            </div>
         </div>
     </div>
+
     @foreach ($products as $product)
         <div class="row justify-content-center my-3">
             <div class="col-md-8">
