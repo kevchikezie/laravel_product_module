@@ -11,11 +11,16 @@ class ProductController extends Controller
 
     public function index()
     {
-        return $this->products->paginate();
+        $products = $this->products->paginate();
+
+        return view('products.index', compact('products'));
+
     }
 
     public function show($id)
     {
-        return $this->products->findOrFail($id);
+        $product = $this->products->findOrFail($id);
+
+        return view('products.show', compact('product'));
     }
 }
