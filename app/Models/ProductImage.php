@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImage extends Model
 {
@@ -24,6 +25,6 @@ class ProductImage extends Model
 
     public function getProductImageUrlAttribute()
     {
-        return asset('uploads/' . $this->name);
+        return Storage::disk('s3')->temporaryUrl($this->name, now()->addMinutes(5));
     }
 }

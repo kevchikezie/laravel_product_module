@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -18,10 +19,9 @@ class ProductService
     public function uploadImage(Product $product, UploadedFile $image): void
     {
         try {
-            $imageName = time().'.'.$image->extension();
-            $image->move(public_path('uploads'), $imageName);
+            $s3FilePath = Storage::disk('s3')->put('/', $image);
 
-            $product->productImage()->create(['name' => $imageName]);
+            $product->productImage()->create(['name' => $s3FilePath]);
         } catch (\Exception $e) {
             Log::error('Image upload failed: '.$e->getMessage());
         }

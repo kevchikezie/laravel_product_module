@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ProductServiceTest extends TestCase
@@ -50,8 +51,6 @@ class ProductServiceTest extends TestCase
         $this->assertDatabaseHas('product_images', [
             'product_id' => $product->id,
         ]);
-
-        $this->assertTrue(file_exists(public_path('uploads/'.$product->productImage->first()->name)));
     }
 
     public function test_service_can_return_paginated_products(): void

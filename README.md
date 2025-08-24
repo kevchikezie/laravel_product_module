@@ -79,8 +79,6 @@ php artisan test
 ```
 
 ## What can be improved
-- **Cloud-Based Storage:** The current implementation relies on local storage. An improvement will be to transition to cloud-based storage (e.g. AWS S3, Cloudinary, etc) to improve asset availability and security.
-
 - **Asynchronous Processing:** To prevent blocking the UI and ensure a responsive user experience, we can offload resource-intensive tasks like image processing and uploading to a background queue using a Laravel Job. This will allow the system to remain fast and efficient.
 
 - **Polymorphic Relationships:** We can refactor the data model to centralize image management. By using a single `Image` model with a polymorphic relationship, it can be associated with any other model (`Product`, `User`, etc.). This eliminates redundant code and simplifies the database schema.
